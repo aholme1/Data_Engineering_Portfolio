@@ -1,0 +1,17 @@
+checks for report_hourly_analysis:
+
+  # Validate metrics
+  - min(num_transactions) >= 0:
+      name: Transaction counts are non-negative
+  - min(total_revenue) >= 0:
+      name: Revenue values are non-negative
+  - min(avg_transaction_value) >= 0:
+      name: Average transaction values are non-negative
+  - min(unique_customers) >= 0:
+      name: Customer counts are non-negative
+
+  # Check for hours between 0 and 23
+  - min(hour) >= 0:
+      name: Hours are not negative
+  - max(hour) <= 23:
+      name: Hours do not exceed 23

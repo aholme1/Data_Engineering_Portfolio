@@ -1,0 +1,16 @@
+checks for retail.report_weekly_invoices:
+  # Ensure for data for the past week
+  - row_count > 0:
+      name: Last week's invoices report contains data
+  
+  # Check for missing values in critical columns
+  - missing_count(invoice_id) = 0:
+      name: No missing invoice IDs
+  - missing_count(datetime) = 0:
+      name: No missing dates
+
+  # Check for valid quantities and totals
+  - min(quantity) > 0:
+      name: All quantities are positive
+  - min(total) > 0:
+      name: All totals are positive
